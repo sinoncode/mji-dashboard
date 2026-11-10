@@ -1,0 +1,364 @@
+import ForgotPassword from "@/pages/auth/forgot-password/ForgotPassword";
+import Login from "@/pages/auth/login/Login";
+import Register from "@/pages/auth/register/Register";
+import BasicTable from "@/pages/basic-table/BasicTable";
+import Calendar from "@/pages/calendar/Calendar";
+import TeamsPermissions from "@/pages/TeamsPermissions";
+import ColumnChartPage from "@/pages/chart/column-chart/ColumnChartPage";
+import LineChartPage from "@/pages/chart/line-chart/LineChartPage";
+import PieChartPage from "@/pages/chart/PieChartPage";
+import Chat from "@/pages/chat/Chat";
+import Alert from "@/pages/components-pages/alert/Alert";
+import Avatar from "@/pages/components-pages/avatar/Avatart";
+import Badges from "@/pages/components-pages/badges/Badges";
+import Buttons from "@/pages/components-pages/buttons/Buttons";
+import CardPage from "@/pages/components-pages/card/CardPage";
+import Colors from "@/pages/components-pages/colors/Colors";
+import Dropdown from "@/pages/components-pages/dropdown/Dropdown";
+import List from "@/pages/components-pages/list/List";
+import Pagination from "@/pages/components-pages/pagination/Pagination";
+import ProgressBar from "@/pages/components-pages/progress-bar/ProgressBar";
+import Radio from "@/pages/components-pages/radio/Radio";
+import StarRatings from "@/pages/components-pages/star-ratings/StarRatings";
+import SwitchPage from "@/pages/components-pages/switch/SwitchPage";
+import TabAccordion from "@/pages/components-pages/tab-accordion/TabAccordion";
+import Tags from "@/pages/components-pages/tags/Tags";
+import TooltipPopover from "@/pages/components-pages/tooltip-popover/TooltipPopover";
+import EmailDetails from "@/pages/emails/email-details/EmailDetails";
+import Email from "@/pages/emails/email/Email";
+import FormValidation from "@/pages/forms/form-validation/FormValidation";
+import InputForms from "@/pages/forms/input-forms/InputForms";
+import InputLayout from "@/pages/forms/input-layout/InputLayout";
+import Company from "@/pages/setting/company/Company";
+import NotificationAlert from "@/pages/setting/notification-alert/NotificationAlert";
+import SettingsNotification from "@/pages/setting/settings-notification/SettingsNotification";
+import CustomersGrid from "../pages/customer/customer-grid/CustomersGrid";
+import CustomersList from "@/pages/customer/CustomersList";
+import ViewProfile from "@/pages/customer/view-profile/ViewProfile";
+import Widgets from "@/pages/widgets/Widgets";
+import { lazy } from "react";
+import { createBrowserRouter, Navigate } from "react-router-dom";
+import NotFound from '../error/404';
+import RouteErrorBoundary from "../error/RouteErrorBoundary";
+import MainLayout from "../layouts/MainLayout";
+import Typography from './../pages/components-pages/typography/Typography';
+import GuestRoutes from "./GuestRoutes";
+import ProtectedRoutes from "./ProtectedRoutes";
+import CustomerDetails from "../pages/customer/CustomerDetails";
+import ProtectedPermissionRoute from "@/components/rbac/ProtectedPermissionRoute";
+import Unauthorized from "@/pages/Unauthorized";
+// import ShipmentRequestList from "../pages/shipments-request/ShipmentRequestList"
+
+const Podcast = lazy(() => import("@/pages/dashboards/podcast/Podcast"));
+const Help = lazy(() => import("@/pages/dashboards/help/Help"));
+const Booking = lazy(() => import("@/pages/dashboards/booking/Booking"));
+const Finance = lazy(() => import("@/pages/dashboards/finance/Finance"));
+const Analytics = lazy(() => import("@/pages/dashboards/analytics/Analytics"));
+const Cryptocurrency = lazy(() => import("@/pages/dashboards/cryptocurrency/Cryptocurrency"));
+const Inventory = lazy(() => import("@/pages/dashboards/inventory/Inventory"));
+const Investment = lazy(() => import("@/pages/dashboards/investment/Investment"));
+const Lms = lazy(() => import("@/pages/dashboards/lms/Lms"));
+const Medical = lazy(() => import("@/pages/dashboards/medical/Medical"));
+const Nft = lazy(() => import("@/pages/dashboards/nft/Nft"));
+const Crm = lazy(() => import("../pages/dashboards/crm/Crm"));
+const Ecommerce = lazy(() => import("../pages/dashboards/ecommerce/Ecommerce"));
+// const AddUser = lazy(() => import("../pages/users/add-user/AddUser"));
+// const AddMember = lazy(() => import("@/pages/teams/add-member/AddMember"));
+const Teams = lazy(() => import("../pages/teams/Teams"));
+const TeamMemberView = lazy(() => import("../pages/teams/TeamMemberView"));
+const ShipmentRequestList = lazy(() => import("../pages/shipments-request/ShipmentRequestList"));
+const ShipmentListView = lazy(() => import("../pages/shipments-request/ShipmentListView"));
+const Shipments = lazy(() => import("../pages/shipments/Shipments"));
+const ShipmentDetail = lazy(() => import("../pages/shipments/ShipmentDetail"));
+const PaymentsList = lazy(() => import("../pages/payments/payments-list/PaymentList"));
+const PaymentDetails = lazy(() => import("../pages/payments/payments-details/PaymentsDetails"));
+const CreatePassword = lazy(() => import("../pages/auth/member-create-password/CreatePassword"));
+const SearchPackage = lazy(() => import("../pages/packages/search-package/SearchPackage"));
+const UnregisteredPackage = lazy(() => import("../pages/packages/unregistered-package/UnregisteredPackage"));
+
+
+
+export const router = createBrowserRouter([
+  {
+    element: <GuestRoutes />,
+    errorElement: <RouteErrorBoundary />,
+    children: [
+      {
+        path: "/auth/login",
+        element: <Login />,
+      },
+      {
+        path: "/auth/register",
+        element: <Register />,
+      },
+      {
+        path: "/auth/forgot-password",
+        element: <ForgotPassword />,
+      },
+      {
+        path: "/auth/create-password",
+        element: <CreatePassword />
+      },
+    ]
+  },
+
+  {
+    element: <ProtectedRoutes />,
+    children: [
+      {
+        path: "/",
+        element: <MainLayout />,
+        errorElement: <RouteErrorBoundary />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/dashboard" replace />,
+          },
+          {
+            path: "dashboard", element:  <ProtectedPermissionRoute
+      permissions={[
+        "dashboard.view"
+      ]}
+    ><Crm /></ProtectedPermissionRoute>
+          },
+          // {
+          //   path: "add-team-member", element: <AddMember />
+          // },
+        {
+  path: "teams-list",
+  element: (
+    <ProtectedPermissionRoute
+      permissions={[
+        "teams.view",
+        "teams.create",
+        "teams.update",
+        "teams.delete",
+      ]}
+    >
+      <Teams />
+    </ProtectedPermissionRoute>
+  ),
+},
+
+{
+  path: "/unauthorized",
+  element: <Unauthorized />,
+},
+          // {
+          //   path: "ai", element: <AiDashboard />
+          // },
+          {
+            path: "ecommerce", element: <Ecommerce />
+          },
+          {
+            path: "cryptocurrency", element: <Cryptocurrency />
+          },
+          {
+            path: "investment", element: <Investment />
+          },
+          {
+            path: "lms", element: <Lms />
+          },
+          {
+            path: "nft", element: <Nft />
+          },
+          {
+            path: "medical", element: <Medical />
+          },
+          {
+            path: "analytics", element: <Analytics />
+          },
+          {
+            path: "inventory", element: <Inventory />
+          },
+          {
+            path: "finance", element: <Finance />
+          },
+          {
+            path: "booking", element: <Booking />
+          },
+          {
+            path: "help", element: <Help />
+          },
+          {
+            path: "podcast", element: <Podcast />
+          },
+          {
+            path: "email", element: <Email />
+          },
+          {
+            path: "email-details", element: <EmailDetails />
+          },
+          {
+            path: "chat", element: <Chat />
+          },
+          {
+            path: "calendar", element: <Calendar />
+          },
+          {
+            path: "typography", element: <Typography />
+          },
+          {
+            path: "colors", element: <Colors />
+          },
+          {
+            path: "buttons", element: <Buttons />
+          },
+          {
+            path: "dropdown", element: <Dropdown />
+          },
+          {
+            path: "alert", element: <Alert />
+          },
+          {
+            path: "card", element: <CardPage />
+          },
+          {
+            path: "avatar", element: <Avatar />
+          },
+          {
+            path: "progress-bar", element: <ProgressBar />
+          },
+          {
+            path: "tab-accordion", element: <TabAccordion />
+          },
+          {
+            path: "pagination", element: <Pagination />
+          },
+          {
+            path: "badges", element: <Badges />
+          },
+          {
+            path: "tooltip", element: <TooltipPopover />
+          },
+          {
+            path: "star-rating", element: <StarRatings />
+          },
+          {
+            path: "tags", element: <Tags />
+          },
+          {
+            path: "list", element: <List />
+          },
+          {
+            path: "radio", element: <Radio />
+          },
+          {
+            path: "switch", element: <SwitchPage />
+          },
+          {
+            path: "input-forms", element: <InputForms />
+          },
+          {
+            path: "input-layout", element: <InputLayout />
+          },
+          {
+            path: "form-validation", element: <FormValidation />
+          },
+          {
+            path: "line-chart", element: <LineChartPage />
+          },
+          {
+            path: "column-chart", element: <ColumnChartPage />
+          },
+          {
+            path: "pie-chart", element: <PieChartPage />
+          },
+          {
+            path: "widgets", element: <Widgets />
+          },
+          {
+            path: "basic-table", element: <BasicTable />
+          },
+          {
+  path: "customers-list",
+  element: (
+    <ProtectedPermissionRoute
+      permissions={[
+        "customers.view",
+        "customers.create",
+        "customers.update",
+        "customers.delete",
+      ]}
+    >
+      <CustomersList />
+    </ProtectedPermissionRoute>
+  ),
+},
+{
+  path: "customers-grid",
+  element: <CustomersGrid />
+},
+          {
+  path: "teams-list/:id",
+  element: <TeamMemberView />
+},
+{
+  path: "customer-details/:id",
+  element: <CustomerDetails />,
+},
+          {
+            path: "view-profile", element: <ViewProfile />
+          },
+          {
+            path: "company", element: <Company />
+          },
+          {
+            path: "settings-notification", element: <SettingsNotification />
+          },
+          {
+            path: "notification-alert", element: <NotificationAlert />
+          },
+          {
+            path: "teams-permissions", element: <TeamsPermissions />
+          },
+          {
+            path: "shipment-request", element: <ShipmentRequestList />
+          },
+          {
+            path: "shipment-requests/:id", element: <ShipmentListView />
+          },
+          {
+            path: "shipments", element: <Shipments /> 
+          },
+          {
+            path: "shipments-detail/:id", element: <ShipmentDetail />
+          },
+          {
+  path: "payment-lists",
+  element: (
+    <ProtectedPermissionRoute
+      permissions={[
+        "payments.view",
+        "payments.initiate",
+        "payments.refund",
+        "payments.verify",
+      ]}
+    >
+      <PaymentsList />
+    </ProtectedPermissionRoute>
+  ),
+},
+          {
+            path: "payment-details/:id", element: <PaymentDetails />
+          },
+          {
+            path: "search-package", element: <SearchPackage />
+          },
+          {
+            path: "unregistered-package", element: <UnregisteredPackage />
+          },
+            
+        ],
+      },
+    ]
+  },
+
+  {
+    path: "*",
+    element: <NotFound />,
+    errorElement: <RouteErrorBoundary />,
+  },
+], {
+  basename: "/",
+});
