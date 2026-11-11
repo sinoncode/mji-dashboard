@@ -169,7 +169,7 @@ console.log(response);
       {/* Header */}
 
       <div className="rounded-3xl bg-gradient-to-r from-slate-900 to-slate-800 text-white p-6 md:p-8">
-        <h1 className="text-3xl font-bold">
+        <h1 className="text-3xl font-bold text-white">
           Warehouse Receiving
         </h1>
 
