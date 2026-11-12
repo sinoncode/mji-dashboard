@@ -128,7 +128,7 @@ export default function UnregisteredReceive() {
         <div className="grid xl:grid-cols-[450px_1fr] gap-8">
           {/* LEFT SIDE */}
 
-          <Card className="overflow-hidden border-0 shadow-2xl bg-gradient-to-br from-[#02374C] via-[#03506F] to-[#046C94] text-white">
+          <Card className="overflow-hidden border-0 shadow-2xl bg-gradient-to-br from-[#0A2148] via-[#12346b] to-[#1E4A85] text-white">
             <CardContent className="p-10 h-full flex flex-col justify-center">
               <div className="space-y-8">
                 <div className="w-20 h-20 rounded-3xl bg-white/10 backdrop-blur-xl flex items-center justify-center">

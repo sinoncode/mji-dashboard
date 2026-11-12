@@ -295,7 +295,7 @@ const isProtectedRole =
               <Button
                 onClick={handleAddRole}
                 disabled={!canCreateRoles || isSaving}
-                className="flex-1 sm:flex-none bg-green-600 hover:bg-green-700 text-white"
+                className="flex-1 sm:flex-none bg-primary hover:bg-green-700 text-white"
               >
                 + Add New Role
               </Button>

@@ -168,17 +168,17 @@ console.log(response);
     <div className="space-y-6 p-4 md:p-6">
       {/* Header */}
 
-      <div className="rounded-3xl bg-gradient-to-r from-slate-900 to-slate-800 text-white p-6 md:p-8">
-        <h1 className="text-3xl font-bold text-white">
-          Warehouse Receiving
-        </h1>
+      <div className="rounded-3xl bg-gradient-to-r from-[#0A2148] via-[#12346b] to-[#1E4A85] text-white p-6 md:p-8">
+  <h1 className="text-3xl font-bold text-white">
+    Warehouse Receiving
+  </h1>
 
-        <p className="text-slate-300 mt-2">
-          Search shipment requests and
-          mark incoming packages as
-          received.
-        </p>
-      </div>
+  <p className="text-blue-100 mt-2">
+    Search shipment requests and
+    mark incoming packages as
+    received.
+  </p>
+</div>
 
       {/* Search */}
 

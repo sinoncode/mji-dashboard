@@ -81,7 +81,7 @@ export const RoleList = ({
                 ? "You need roles.create permission to add a new role."
                 : undefined
             }
-            className="bg-green-600 hover:bg-green-700 text-white gap-2 disabled:cursor-not-allowed disabled:opacity-50"
+            className="bg-primary hover:bg-green-700 text-white gap-2 disabled:cursor-not-allowed disabled:opacity-50"
           >
             <Plus className="h-4 w-4" />
 
